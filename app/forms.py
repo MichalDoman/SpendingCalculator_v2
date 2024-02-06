@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import MinValueValidator
 
-from main_app.models import Room
+from app.models import Room
 
 
 class HomeListFilterForm(forms.Form):
