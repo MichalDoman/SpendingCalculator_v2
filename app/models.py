@@ -1,17 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class Room(models.Model):
-    name = models.CharField(max_length=256, null=True)
-    size = models.FloatField()
+class List(models.Model):
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        unique_together = ['name', 'user']
 
 
-class Purchase(models.Model):
-    item = models.CharField(max_length=256)
-    producer = models.CharField(max_length=256, null=True)
-    price = models.FloatField()
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    date = models.DateField()
+class Expense(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(decimal_places=2)
+    quantity = models.IntegerField(null=True)
+    date = models.DateField(null=True)
+
+
+class ExpenseAttribute(models.Model):
+    TYPES = [
+        ('float', 'Number'),
+        ('choices', 'Choices')
+    ]
+    name = models.CharField(max_length=255)
+    expense = models.ForeignKey(Expense, on_delete=models.CASCADE)
+    attr_type = models.CharField(choices=TYPES)
+    unit = models.CharField(max_length=10, null=True)
