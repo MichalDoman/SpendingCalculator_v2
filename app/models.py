@@ -13,16 +13,30 @@ class List(models.Model):
 class Expense(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(decimal_places=2)
-    quantity = models.IntegerField(null=True)
     date = models.DateField(null=True)
+    list = models.ForeignKey(List, on_delete=models.CASCADE)
 
 
-class ExpenseAttribute(models.Model):
+class CustomField(models.Model):
     TYPES = [
         ('float', 'Number'),
-        ('choices', 'Choices')
+        ('choices', 'Text')
     ]
     name = models.CharField(max_length=255)
-    expense = models.ForeignKey(Expense, on_delete=models.CASCADE)
-    attr_type = models.CharField(choices=TYPES)
+    list = models.ForeignKey(List, on_delete=models.CASCADE)
+    field_type = models.CharField(choices=TYPES)
     unit = models.CharField(max_length=10, null=True)
+
+
+class CustomChoice(models.Model):
+    name = models.CharField(max_length=255)
+    expense = models.ForeignKey(Expense, on_delete=models.CASCADE)
+    custom_field = models.ForeignKey(CustomField, on_delete=models.CASCADE)
+
+
+class CustomFieldValue(models.Model):
+    int_value = models.IntegerField(null=True)
+    text_value = models.ForeignKey(CustomChoice, on_delete=models.CASCADE, null=True)
+    expense = models.ForeignKey(Expense, on_delete=models.CASCADE)
+    custom_field = models.ForeignKey(CustomField, on_delete=models.CASCADE)
+
