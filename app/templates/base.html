@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -12,27 +12,21 @@
     <nav class="nav-bar">
         <ul class="nav-list">
             <li>
-                <a href="{% url "home" %}">
-                    <i class="material-icons">home</i>
-                    <span>home</span>
-                </a>
-            </li>
-            <li>
-                <a href="{% url "add_item" %}">
-                    <span>add item</span>
-                    <i class="material-icons">post_add</i>
-                </a>
+                Home
             </li>
             {% if not request.user.is_authenticated %}
                 <li>
-                    <a href="{% url "login" %}">
-                        <span>Login</span>
-                    </a>
+                    Login
                 </li>
                 <li>
-                    <a href="{% url "register" %}">
-                        <span>register</span>
-                    </a>
+                    Register
+                </li>
+            {% else %}
+                <li>
+                    My Lists
+                </li>
+                <li>
+                    Logout
                 </li>
             {% endif %}
         </ul>
@@ -41,6 +35,6 @@
     <div class="content-box">
             {% block content %}{% endblock %}
     </div>
-
 </body>
+
 </html>

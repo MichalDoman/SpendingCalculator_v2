@@ -35,7 +35,7 @@ class CustomChoice(models.Model):
 
 
 class CustomFieldValue(models.Model):
-    int_value = models.IntegerField(null=True)
+    int_value = models.FloatField(null=True)
     text_value = models.ForeignKey(CustomChoice, on_delete=models.CASCADE, null=True)
     expense = models.ForeignKey(Expense, on_delete=models.CASCADE)
     custom_field = models.ForeignKey(CustomField, on_delete=models.CASCADE)
