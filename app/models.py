@@ -12,7 +12,7 @@ class List(models.Model):
 
 class Expense(models.Model):
     name = models.CharField(max_length=255)
-    price = models.DecimalField(decimal_places=2)
+    price = models.FloatField()
     date = models.DateField(null=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
 
