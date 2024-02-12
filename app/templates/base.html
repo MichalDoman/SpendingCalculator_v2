@@ -9,32 +9,38 @@
 </head>
 
 <body>
-    <nav class="nav-bar">
-        <ul class="nav-list">
+<nav class="nav-bar">
+    <ul class="nav-list">
+        <li>
+            <a href="{% url 'home' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
             <li>
-                Home
+                <a href="">My Lists</a>
             </li>
-            {% if not request.user.is_authenticated %}
-                <li>
-                    Login
-                </li>
-                <li>
-                    Register
-                </li>
-            {% else %}
-                <li>
-                    My Lists
-                </li>
-                <li>
-                    Logout
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+            <li>
+                User: {{ user.username }}
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'register' %}">Register</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
 
-    <div class="content-box">
-            {% block content %}{% endblock %}
-    </div>
+<div class="content-box">
+    {% block content %}{% endblock %}
+</div>
 </body>
 
 </html>

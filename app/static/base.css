@@ -1,0 +1,30 @@
+/*---------------------------------------------------------- BASE HTML:*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0 0 0;
+}
+
+.nav-list {
+    width: 50%;
+    display: flex;
+}
+
+.nav-list li {
+    list-style: none;
+    flex: 1;
+    font-size: 30px;
+}

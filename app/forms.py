@@ -14,7 +14,7 @@ from django.core.validators import MinValueValidator
 
 
 class RegisterForm(forms.Form):
-    """A form used for registering new users."""
-    email = forms.EmailField(required=True)
+    """A form used for registration."""
+    email = forms.CharField(required=True)
     password = forms.CharField(widget=forms.PasswordInput)
-    repeated_password = forms.CharField(widget=forms.PasswordInput)
+    password_repeated = forms.CharField(widget=forms.PasswordInput)

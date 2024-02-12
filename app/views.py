@@ -9,7 +9,7 @@ from app.forms import RegisterForm
 
 
 class HomeView(TemplateView):
-    template_name = 'base.html'
+    template_name = 'app/home.html'
 
 
 class RegisterView(FormView):
