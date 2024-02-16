@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView, CreateView
+from django.views.generic import TemplateView, FormView, CreateView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
@@ -7,11 +7,20 @@ from app.models import List
 from app.forms import RegisterForm
 
 
-# SORTING_NAMES = ["item", "-item", "price", "-price", "producer", "-producer", "room", "-room", "date", "-date"]
-
-
 class HomeView(TemplateView):
     template_name = 'app/home.html'
+
+
+class ListListView(ListView):
+    model = List
+    template_name_suffix = "_list"
+    context_object_name = "lists"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        queryset = queryset.filter(user=user)
+        return queryset
 
 
 class CreateListView(CreateView):

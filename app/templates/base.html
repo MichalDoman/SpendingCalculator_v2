@@ -16,7 +16,7 @@
         </li>
         {% if user.is_authenticated %}
             <li>
-                <a href="">My Lists</a>
+                <a href="{% url 'lists' %}">My Lists</a>
             </li>
             <li>
                 <form action="{% url 'logout' %}" method="post">

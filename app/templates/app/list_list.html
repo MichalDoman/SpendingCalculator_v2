@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your lists{% endblock %}
+
+{% block content %}
+    <div class="lists">
+        <ul>
+            {% for list in lists %}
+                <li>{{ list.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
